@@ -1,3 +1,5 @@
 # Scraping
 requests
 
+# Testing
+tox
