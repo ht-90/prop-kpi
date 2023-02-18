@@ -4,4 +4,9 @@ if __name__ == "__main__":
 
     # Preprocessing
     ba_scraper = BuildingApprovalsScraper()
-    ba_scraper.execute()
+
+    if os.path.exists(ba_scraper.dest_path):
+        print("Building approvals data already downloaded.")
+
+    else:
+        ba_scraper.execute()
