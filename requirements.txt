@@ -1,5 +1,11 @@
 # Scraping
 requests
 
+# AWS
+boto3
+
+# Environmental variables
+python-dotenv
+
 # Testing
 tox
