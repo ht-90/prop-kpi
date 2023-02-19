@@ -22,10 +22,7 @@ class BuildingApprovalsScraper(DataScraper):
             self.parent_path,
             "building_approval"
         )
-        self.base_url = "https://www.abs.gov.au/\
-                         statistics/industry/\
-                         building-and-construction/\
-                         building-approvals-australia/"
+        self.base_url = "https://www.abs.gov.au/statistics/industry/building-and-construction/building-approvals-australia/"
         self.base_name = "87310do0"
         self.year = [2020, 2021, 2022]
         self.map_month = {
