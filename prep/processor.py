@@ -44,7 +44,8 @@ class BuildingApprovalsProcessor:
         col_dtypes = get_dtypes_from_dynamodb(attrs=attrs)
 
         # Read data file and process as a dataframe
-        df = self.read_excel_file()
+        pengine = self.get_processor_engine()
+        df = self.read_excel_file(engine=pengine)
         df = self.set_column_names(df=df)
         df = self.add_metadata(df=df, meta=meta_info)
         df["id"] = range(data_id, data_id + df.shape[0])
@@ -55,13 +56,32 @@ class BuildingApprovalsProcessor:
 
         return df.to_dict(orient="records"), data_id
 
-    def read_excel_file(self):
+    def get_processor_engine(self):
+        """Returns an appropriate engine name based on a file format.
+
+        :returns: A pandas read_excel engine name
+        :rtype: str
+        """
+        fformat = self.dfile.split(".")[-1]
+        if fformat == "xls":
+            return "xlrd"
+        elif fformat == "xlsx":
+            return "openpyxl"
+        else:
+            print(f"'{fformat}' is not processed - needs to be either '.xls' or '.xlsx'.")
+
+    def read_excel_file(self, engine):
         """Read data and remove empty rows.
 
         :returns: A dataframe sliced for a data cube
         :rtype: pandas DataFrame
         """
-        df = pd.read_excel(os.path.join(self.ddir, self.dfile), sheet_name=self.sheet, skiprows=6).iloc[:, :5]
+        df = pd.read_excel(
+            os.path.join(self.ddir, self.dfile),
+            engine=engine,
+            sheet_name=self.sheet,
+            skiprows=6
+        ).iloc[:, :5]
         rm_row = df[df[df.columns[0]].isna()].index[0]
 
         return df.iloc[:rm_row, :]
