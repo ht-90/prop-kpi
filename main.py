@@ -4,6 +4,7 @@ import dotenv
 import boto3
 
 from prep.scraper import BuildingApprovalsScraper
+from prep.processor import BuildingApprovalsProcessor
 import prep.model as model
 
 
@@ -46,3 +47,24 @@ if __name__ == "__main__":
     # Create empty tables from model.py
     model_ba.create_table()
     model_ba.__repr__()
+
+    # ETL process
+    
+    # Access database table and attributes
+    ba_table = db.Table(model_ba.table_name)
+    ba_attrs = ba_table.attribute_definitions
+
+    data_path = "./data"
+    data_dir = os.path.join(data_path, "building_approval")
+    data_files = os.listdir(data_dir)
+    print(len(data_files), "files to be procesed.")
+
+    data_id = 1
+
+    for data_file in data_files:
+        print(f"Processing: {data_file}")
+        ba_processor = BuildingApprovalsProcessor(data_dir, data_file)
+        data_item, data_id = ba_processor.process_data(data_id, ba_attrs)
+
+        for item in data_item:
+            ba_table.put_item(Item=item)
