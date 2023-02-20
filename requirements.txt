@@ -1,5 +1,16 @@
 # Scraping
 requests
 
+# Processing
+xlrd
+openpyxl
+pandas
+
+# AWS
+boto3
+
+# Environmental variables
+python-dotenv
+
 # Testing
 tox
