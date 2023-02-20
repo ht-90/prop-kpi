@@ -72,23 +72,30 @@ class BuildingApprovalsScraper(DataScraper):
         for f in self.file_urls:
             with requests.get(f"{f}.{self.formats[0]}") as req:
                 if req.status_code == 200:
-                    self.download_single_file(f, 0)
+                    self.download_single_file(f, req, 0)
                 else:
-                    self.download_single_file(f, 1)
+                    with requests.get(f"{f}.{self.formats[1]}") as req:
+                        if req.status_code == 200:
+                            self.download_single_file(f, req, 1)
+                        else:
+                            with requests.get(f"{f}%20.{self.formats[1]}") as req:
+                                if req.status_code == 200:
+                                    self.download_single_file(f"{f}%20", req, 1)
 
-    def download_single_file(self, url, ind):
+    def download_single_file(self, url, req, ind):
         """Download a file from URL.
 
         :param url: URL
         :type: str
+        :param req: Response object from requests.get
+        :type: requests object
         :param ind: An index for file formats
         :type: int
         """
-        with requests.get(f"{url}.{self.formats[ind]}") as f_req:
-            f_name = f"{url.split('/')[-1]}.{self.formats[ind]}"
-            file_path = os.path.join(self.dest_path, f_name)
-            open(file_path, 'wb').write(f_req.content)
-            print(f"Downloaded: {url.split('/')[-1]}.{self.formats[ind]}")
+        f_name = f"{url.split('/')[-1]}.{self.formats[ind]}"
+        file_path = os.path.join(self.dest_path, f_name)
+        open(file_path, 'wb').write(req.content)
+        print(f"Downloaded: {url.split('/')[-1]}.{self.formats[ind]}")
 
     def execute(self):
         """Execute generating a directory and downloading data files."""
