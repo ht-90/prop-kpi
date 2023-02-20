@@ -7,6 +7,14 @@
 
 ## Setup
 
+Python environment
+
+```shell
+>>> python3 -m venv .venv
+>>> source .venv/bin/activate
+>>> pip install -r requirements.txt
+```
+
 Create `.env` file at root directory:
 
 ```.env file
