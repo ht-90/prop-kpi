@@ -1,6 +1,11 @@
 # Scraping
 requests
 
+# Processing
+xlrd
+openpyxl
+pandas
+
 # AWS
 boto3
 
