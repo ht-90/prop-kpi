@@ -4,6 +4,17 @@ services:
 
   dynamodb:
     image: amazon/dynamodb-local:latest
+    container_name: prop-kpi-database
     ports:
       - "8000:8000"
     command: ["-jar", "DynamoDBLocal.jar", "-sharedDb", "-inMemory"]
+
+  app:
+    image: prop-kpi-app:latest
+    container_name: prop-kpi-app
+    build:
+      context: ./app
+    volumes:
+      - "./app:/src"
+    ports:
+      - "1616:1616"
