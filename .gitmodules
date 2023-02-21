@@ -1,6 +1,3 @@
-[submodule "themes/hugo-refresh"]
-	path = themes/hugo-refresh
-	url = https://github.com/PippoRJ/hugo-refresh.git
-[submodule "app/themes/hugo-refresh"]
-	path = app/themes/hugo-refresh
-	url = https://github.com/PippoRJ/hugo-refresh.git
+[submodule "app/themes/bookworm-light"]
+	path = app/themes/bookworm-light
+	url = https://github.com/gethugothemes/bookworm-light
