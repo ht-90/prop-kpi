@@ -135,3 +135,7 @@ dmypy.json
 .DS_Store
 data/*
 !data/.gitkeep
+
+# Hugo
+public
+.hugo_build.lock
