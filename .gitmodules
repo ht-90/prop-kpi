@@ -1,3 +1,6 @@
-[submodule "app/themes/toha"]
-	path = app/themes/toha
-	url = https://github.com/hugo-toha/toha.git
+[submodule "themes/hugo-refresh"]
+	path = themes/hugo-refresh
+	url = https://github.com/PippoRJ/hugo-refresh.git
+[submodule "app/themes/hugo-refresh"]
+	path = app/themes/hugo-refresh
+	url = https://github.com/PippoRJ/hugo-refresh.git
