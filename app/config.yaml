@@ -1,6 +1,6 @@
 baseURL: https://example.com
-languageCode: en-us
-title: Personal website and blog
+languageCode: en-au
+title: PROP-KPI
 theme: hugo-refresh
 # theme: ../..
 
@@ -106,9 +106,9 @@ params:
     # this options let you specify the text of the link to the homepage
     # linkText: "Homepage"  
     # option to specify the title in the homepage
-    title: Julia The White
+    title: PROP-KPI
     # option to specify the subtitle in the homepage
-    subtitle: Personal website and blog
+    subtitle: Helping Decision-Making for Property Investment
     # option to specify image in the homepage
     image: "/images/avataaars.png" # worker.svg 
     # option to specify the width of the image in the homepage
@@ -158,7 +158,7 @@ params:
     #    link: username
     #    title: Telegram
     # option to specify the copyright in the footer
-    copyright: Julia The White - 2021
+    copyright: ht-90 - 2023
 
 ###################################################################
 ################## multilanguage support options ##################
@@ -177,8 +177,8 @@ languages:
     # See example below:
     params:
       homepage:
-        title: Julia белая краска
-        subtitle: Персональный сайт и блог
+        title: PROP-KPI
+        subtitle: Subtitle
         image: "/images/avataaars.png" # worker.svg 
         imageWidth: 500px
       
@@ -190,8 +190,8 @@ languages:
       footer:
         logo: "/images/refresh-square.svg"
         email: 
-          link: имя.фамилия@домен.com
-          title: Эл. адрес
+          link: emailaddress@gmail.com
+          title: Email
         linkedin: 
           link: your_linkedin_profile
           title: LinkedIn
@@ -210,5 +210,5 @@ languages:
         # gitlab: 
         #   link: username
         #   title: Gitlab
-        copyright: Julia белая краска - 2020
+        copyright: ht-90 - 2023
       
