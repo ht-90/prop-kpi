@@ -167,9 +167,9 @@ languages:
   en:
     languageName:       English
     weight:             1
-  ru:
-    languageName:       Russian
-    weight:             2
+  #ru:
+  #  languageName:       Russian
+  #  weight:             2
     # When Specifying different parameters for a different language 
     # you need to specify all the mandatory sub-parameters as well.
     # E.g.: if you specify the "homepage" parameter then you need to
