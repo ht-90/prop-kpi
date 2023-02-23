@@ -2,6 +2,8 @@
 
 import os
 import pandas as pd
+import json
+from decimal import Decimal
 
 
 class BuildingApprovalsProcessor:
@@ -54,10 +56,10 @@ class BuildingApprovalsProcessor:
         # Update record id
         data_id += df.shape[0]
 
-        return df.to_dict(orient="records"), data_id
+        return convert_df_to_json(df), data_id
 
     def get_processor_engine(self):
-        """Returns an appropriate engine name based on a file format.
+        """Return an appropriate engine name based on a file format.
 
         :returns: A pandas read_excel engine name
         :rtype: str
@@ -147,3 +149,17 @@ def get_dtypes_from_dynamodb(attrs):
             col_dtypes.update({attr["AttributeName"]: int})
 
     return col_dtypes
+
+
+def convert_df_to_json(df):
+    """Convert dataframe to json.
+
+    :param: A pandas dataframe
+    :type: pandas DataFrame
+    :returns: A json object with float values converted to Decimal type
+    :rtype: json
+    """
+    return json.loads(
+        json.dumps(df.to_dict(orient="records")),
+        parse_float=Decimal
+    )
