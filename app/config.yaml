@@ -110,7 +110,7 @@ params:
     # option to specify the subtitle in the homepage
     subtitle: Helping Decision-Making for Property Investment
     # option to specify image in the homepage
-    image: "/images/avataaars.png" # worker.svg 
+    image: "/images/home.png" # worker.svg 
     # option to specify the width of the image in the homepage
     imageWidth: 500px
 
@@ -167,9 +167,9 @@ languages:
   en:
     languageName:       English
     weight:             1
-  ru:
-    languageName:       Russian
-    weight:             2
+  #ru:
+  #  languageName:       Russian
+  #  weight:             2
     # When Specifying different parameters for a different language 
     # you need to specify all the mandatory sub-parameters as well.
     # E.g.: if you specify the "homepage" parameter then you need to
@@ -178,8 +178,8 @@ languages:
     params:
       homepage:
         title: PROP-KPI
-        subtitle: Subtitle
-        image: "/images/avataaars.png" # worker.svg 
+        subtitle: Helping Decision-Making for Property Investment
+        image: "/images/home.png" # worker.svg 
         imageWidth: 500px
       
       # Some sub-parameters of the "footer" parameter
