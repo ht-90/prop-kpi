@@ -109,8 +109,8 @@ class BuildingApprovalsProcessor:
         """
         file_parts = self.dfile.split("_")
         meta = {
-            "year": file_parts[1][:4],
-            "month": file_parts[1][4:6],
+            "year": int(file_parts[1][:4]),
+            "month": int(file_parts[1][4:6]),
             "state_id": file_parts[0][-2:],
             "state_name": self.map_state[file_parts[0][-2:]],
             "date": f"{file_parts[1][:4]}-{file_parts[1][4:6]}-01"
