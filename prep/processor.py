@@ -113,6 +113,7 @@ class BuildingApprovalsProcessor:
             "month": file_parts[1][4:6],
             "state_id": file_parts[0][-2:],
             "state_name": self.map_state[file_parts[0][-2:]],
+            "date": f"{file_parts[1][:4]}-{file_parts[1][4:6]}-01"
         }
 
         return meta
