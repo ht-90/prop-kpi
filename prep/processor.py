@@ -62,13 +62,9 @@ class BuildingApprovalsProcessor:
 
         # Add columns for metadata
         df = self.add_metadata(df=df, meta=meta_info)
-        df["id"] = range(data_id, data_id + df.shape[0])
         df = df.astype(col_dtypes)
 
-        # Update record id
-        data_id += df.shape[0]
-
-        return convert_df_to_json(df), data_id
+        return convert_df_to_json(df)
 
     def get_processor_engine(self):
         """Return an appropriate engine name based on a file format.

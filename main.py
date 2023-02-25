@@ -59,12 +59,11 @@ if __name__ == "__main__":
     data_files = os.listdir(data_dir)
     print(len(data_files), "files to be procesed.")
 
-    data_id = 1
 
     for data_file in data_files:
         print(f"Processing: {data_file}")
         ba_processor = BuildingApprovalsProcessor(data_dir, data_file)
-        data_item, data_id = ba_processor.process_data(data_id, ba_attrs)
+        data_item = ba_processor.process_data(ba_attrs)
 
         for item in data_item:
             ba_table.put_item(Item=item)
