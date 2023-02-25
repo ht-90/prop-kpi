@@ -35,13 +35,10 @@ class BuildingApprovals:
                     {'AttributeName': 'date', 'KeyType': 'RANGE'}
                 ],
                 AttributeDefinitions=[
-                    {'AttributeName': 'lga_id', 'AttributeType': 'N'},
+                    {'AttributeName': 'lga_id', 'AttributeType': 'S'},
                     {'AttributeName': 'date', 'AttributeType': 'S'}
                 ],
-                ProvisionedThroughput={
-                    'ReadCapacityUnits': 1,
-                    'WriteCapacityUnits': 1,
-                }
+                BillingMode='PAY_PER_REQUEST'
             )
             self.table.wait_until_exists()
 
