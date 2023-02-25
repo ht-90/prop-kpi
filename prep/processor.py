@@ -27,6 +27,13 @@ class BuildingApprovalsProcessor:
             "28": "nt",
             "32": "act",
         }
+        self.cols = {
+            "lga_id": int,
+            "lga_name": str,
+            "new_houses": int,
+            "new_other_res": int,
+            "total_dwell": int
+        }
         self.sheet = "Table_1"
         self.dfile = data_file
         self.ddir = data_dir
@@ -48,7 +55,12 @@ class BuildingApprovalsProcessor:
         # Read data file and process as a dataframe
         pengine = self.get_processor_engine()
         df = self.read_excel_file(engine=pengine)
-        df = self.set_column_names(df=df)
+
+        # Set columns and data types
+        df.columns = self.cols.keys()
+        df = df.astype(self.cols)
+
+        # Add columns for metadata
         df = self.add_metadata(df=df, meta=meta_info)
         df["id"] = range(data_id, data_id + df.shape[0])
         df = df.astype(col_dtypes)
@@ -87,19 +99,6 @@ class BuildingApprovalsProcessor:
         rm_row = df[df[df.columns[0]].isna()].index[0]
 
         return df.iloc[:rm_row, :]
-
-    def set_column_names(self, df):
-        """Set column names for a database table.
-
-        :param df: A dataframe
-        :type: pandas DataFrame
-        :returns: A dataframe with updated column names
-        :rtype: pandas DataFrame
-        """
-        cols = ["lga_id", "lga_name", "new_houses", "new_other_res", "total_dwell"]
-        df.columns = cols
-
-        return df
 
     def parse_metadata(self):
         """Get metadata info from file name.
