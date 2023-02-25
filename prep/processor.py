@@ -38,11 +38,9 @@ class BuildingApprovalsProcessor:
         self.dfile = data_file
         self.ddir = data_dir
 
-    def process_data(self, data_id, attrs):
+    def process_data(self, attrs):
         """Process building approvals data file to dict format.
 
-        :param data_id: A starting data record id
-        :type: int
         :param attrs: DynamoDB table attributes
         :type: dict
         :returns: A list of data in dict format and an updated data id
