@@ -27,15 +27,20 @@ class BuildingApprovalsProcessor:
             "28": "nt",
             "32": "act",
         }
+        self.cols = {
+            "lga_id": int,
+            "lga_name": str,
+            "new_houses": int,
+            "new_other_res": int,
+            "total_dwell": int
+        }
         self.sheet = "Table_1"
         self.dfile = data_file
         self.ddir = data_dir
 
-    def process_data(self, data_id, attrs):
+    def process_data(self, attrs):
         """Process building approvals data file to dict format.
 
-        :param data_id: A starting data record id
-        :type: int
         :param attrs: DynamoDB table attributes
         :type: dict
         :returns: A list of data in dict format and an updated data id
@@ -48,15 +53,16 @@ class BuildingApprovalsProcessor:
         # Read data file and process as a dataframe
         pengine = self.get_processor_engine()
         df = self.read_excel_file(engine=pengine)
-        df = self.set_column_names(df=df)
+
+        # Set columns and data types
+        df.columns = self.cols.keys()
+        df = df.astype(self.cols)
+
+        # Add columns for metadata
         df = self.add_metadata(df=df, meta=meta_info)
-        df["id"] = range(data_id, data_id + df.shape[0])
         df = df.astype(col_dtypes)
 
-        # Update record id
-        data_id += df.shape[0]
-
-        return convert_df_to_json(df), data_id
+        return convert_df_to_json(df)
 
     def get_processor_engine(self):
         """Return an appropriate engine name based on a file format.
@@ -88,19 +94,6 @@ class BuildingApprovalsProcessor:
 
         return df.iloc[:rm_row, :]
 
-    def set_column_names(self, df):
-        """Set column names for a database table.
-
-        :param df: A dataframe
-        :type: pandas DataFrame
-        :returns: A dataframe with updated column names
-        :rtype: pandas DataFrame
-        """
-        cols = ["lga_id", "lga_name", "new_houses", "new_other_res", "total_dwell"]
-        df.columns = cols
-
-        return df
-
     def parse_metadata(self):
         """Get metadata info from file name.
 
@@ -109,10 +102,11 @@ class BuildingApprovalsProcessor:
         """
         file_parts = self.dfile.split("_")
         meta = {
-            "year": file_parts[1][:4],
-            "month": file_parts[1][4:6],
+            "year": int(file_parts[1][:4]),
+            "month": int(file_parts[1][4:6]),
             "state_id": file_parts[0][-2:],
             "state_name": self.map_state[file_parts[0][-2:]],
+            "date": f"{file_parts[1][:4]}-{file_parts[1][4:6]}-01"
         }
 
         return meta
