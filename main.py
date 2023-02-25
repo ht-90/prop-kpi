@@ -39,21 +39,18 @@ if __name__ == "__main__":
 
     # Access tables
     model_ba = model.BuildingApprovals(db)
-
-    # Delete existing tables
-    if model_ba.table_name in db_tables:
-        model_ba.delete_table()
-
-    # Create empty tables from model.py
-    model_ba.create_table()
-    model_ba.__repr__()
-
-    # ETL process
-    
-    # Access database table and attributes
     ba_table = db.Table(model_ba.table_name)
     ba_attrs = ba_table.attribute_definitions
 
+    # Delete existing tables and create a table
+    if model_ba.table_name in db_tables:
+        model_ba.delete_table()
+        ba_table.wait_until_not_exists()
+
+    model_ba.create_table()
+    ba_table.wait_until_exists()
+
+    # ETL process
     data_path = "./data"
     data_dir = os.path.join(data_path, "building_approval")
     data_files = os.listdir(data_dir)
