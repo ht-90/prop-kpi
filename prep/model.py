@@ -31,80 +31,14 @@ class BuildingApprovals:
             self.table = self.dyn_resource.create_table(
                 TableName=self.table_name,
                 KeySchema=[
-                    {'AttributeName': 'id', 'KeyType': 'HASH'}
+                    {'AttributeName': 'lga_id', 'KeyType': 'HASH'},
+                    {'AttributeName': 'date', 'KeyType': 'RANGE'}
                 ],
                 AttributeDefinitions=[
-                    {'AttributeName': 'id', 'AttributeType': 'N'},
-                    {'AttributeName': 'lga_id', 'AttributeType': 'N'},
-                    {'AttributeName': 'lga_name', 'AttributeType': 'S'},
-                    {'AttributeName': 'state_id', 'AttributeType': 'N'},
-                    {'AttributeName': 'state_name', 'AttributeType': 'S'},
-                    {'AttributeName': 'month', 'AttributeType': 'N'},
-                    {'AttributeName': 'year', 'AttributeType': 'N'},
-                    {'AttributeName': 'new_houses', 'AttributeType': 'N'},
-                    {'AttributeName': 'new_other_res', 'AttributeType': 'N'},
-                    {'AttributeName': 'total_dwell', 'AttributeType': 'N'}
+                    {'AttributeName': 'lga_id', 'AttributeType': 'S'},
+                    {'AttributeName': 'date', 'AttributeType': 'S'}
                 ],
-                GlobalSecondaryIndexes=[
-                    {
-                        'IndexName': 'lga_id',
-                        'KeySchema': [{'AttributeName': 'lga_id', 'KeyType': 'HASH'}],
-                        'Projection': {'ProjectionType': 'ALL'},
-                        'ProvisionedThroughput': {'ReadCapacityUnits': 1, 'WriteCapacityUnits': 1}
-                    },
-                    {
-                        'IndexName': 'lga_name',
-                        'KeySchema': [{'AttributeName': 'lga_name', 'KeyType': 'HASH'}],
-                        'Projection': {'ProjectionType': 'ALL'},
-                        'ProvisionedThroughput': {'ReadCapacityUnits': 1, 'WriteCapacityUnits': 1}
-                    },
-                    {
-                        'IndexName': 'month',
-                        'KeySchema': [{'AttributeName': 'month', 'KeyType': 'HASH'}],
-                        'Projection': {'ProjectionType': 'ALL'},
-                        'ProvisionedThroughput': {'ReadCapacityUnits': 1, 'WriteCapacityUnits': 1}
-                    },
-                    {
-                        'IndexName': 'year',
-                        'KeySchema': [{'AttributeName': 'year', 'KeyType': 'HASH'}],
-                        'Projection': {'ProjectionType': 'ALL'},
-                        'ProvisionedThroughput': {'ReadCapacityUnits': 1, 'WriteCapacityUnits': 1}
-                    },
-                    {
-                        'IndexName': 'state_id',
-                        'KeySchema': [{'AttributeName': 'state_id', 'KeyType': 'HASH'}],
-                        'Projection': {'ProjectionType': 'ALL'},
-                        'ProvisionedThroughput': {'ReadCapacityUnits': 1, 'WriteCapacityUnits': 1}
-                    },
-                    {
-                        'IndexName': 'state_name',
-                        'KeySchema': [{'AttributeName': 'state_name', 'KeyType': 'HASH'}],
-                        'Projection': {'ProjectionType': 'ALL'},
-                        'ProvisionedThroughput': {'ReadCapacityUnits': 1, 'WriteCapacityUnits': 1}
-                    },
-                    {
-                        'IndexName': 'new_houses',
-                        'KeySchema': [{'AttributeName': 'new_houses', 'KeyType': 'HASH'}],
-                        'Projection': {'ProjectionType': 'ALL'},
-                        'ProvisionedThroughput': {'ReadCapacityUnits': 1, 'WriteCapacityUnits': 1}
-                    },
-                    {
-                        'IndexName': 'new_other_res',
-                        'KeySchema': [{'AttributeName': 'new_other_res', 'KeyType': 'HASH'}],
-                        'Projection': {'ProjectionType': 'ALL'},
-                        'ProvisionedThroughput': {'ReadCapacityUnits': 1, 'WriteCapacityUnits': 1}
-                    },
-                    {
-                        'IndexName': 'total_dwell',
-                        'KeySchema': [{'AttributeName': 'total_dwell', 'KeyType': 'HASH'}],
-                        'Projection': {'ProjectionType': 'ALL'},
-                        'ProvisionedThroughput': {'ReadCapacityUnits': 1, 'WriteCapacityUnits': 1}
-                    },
-                ],
-                ProvisionedThroughput={
-                    'ReadCapacityUnits': 1,
-                    'WriteCapacityUnits': 1,
-                }
+                BillingMode='PAY_PER_REQUEST'
             )
             self.table.wait_until_exists()
 
