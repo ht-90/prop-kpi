@@ -14,6 +14,6 @@ tags: ["Analytics"]
 
 {{< js_geography >}}
 
-This metric shows time series of approved dwellings in LGA (Local Government Area) in each month from 2019 to 2022.
+{{< js_query >}}
 
 ** INSERT DASHBOARD HERE **

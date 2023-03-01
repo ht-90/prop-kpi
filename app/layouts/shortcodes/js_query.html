@@ -1,0 +1,21 @@
+<script>
+    // API call to get data
+    function queryData() {
+        // Get selected LGA ID
+        var lga_name = document.getElementById("lga_id").value;
+        var lga_id = document.querySelector(`datalist option[value="${lga_name}"]`).dataset.id;
+
+        // API call to get data
+        $.ajax({
+            type: "POST",
+            url: "https://7fukb3rrs6.execute-api.ap-southeast-2.amazonaws.com/Query",
+            data: JSON.stringify({ "lga_id": lga_id }),
+            dataType: "json",
+            success: function(response){ 
+                data = response["body"];
+                createCharts(data);
+                $("#submit").attr('disabled', false);
+            }
+        });
+    };
+</script>
