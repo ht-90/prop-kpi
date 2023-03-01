@@ -8,7 +8,9 @@ summaryImage: ""
 tags: ["Analytics"]
 ---
 
-This is KPI 4 (New Dwellings)
+{{< dashboard 
+    kpi_description="Number of New Dwellings are counted from building approvals data sourced from Australian Beuraue of Statistics (ABS). This metric shows time series of approved dwellings in LGA (Local Government Area) in each month from 2019 to 2022."
+    chart_title="No. of Building Approvals" >}}
 
 Number of New Dwellings are counted from building approvals data.
 
