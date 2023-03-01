@@ -16,4 +16,4 @@ tags: ["Analytics"]
 
 {{< js_query >}}
 
-** INSERT DASHBOARD HERE **
+{{< js_chart >}}
