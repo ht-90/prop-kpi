@@ -1,0 +1,40 @@
+<script>
+    function createCharts(data) {
+        // Process data
+        var dates = new Array()
+        var dwells = new Array()
+        for (let i = 0; i < data.length; i++) {
+            dates.push(data[i].date);
+            dwells.push(parseInt(data[i].total_dwell));
+        }
+    
+        // Delete chart if exists
+        if (document.getElementById('myChart') != null) {
+            document.getElementById('myChart').remove();
+        };
+    
+        // Create a new chart
+        var chart_block = document.getElementById("chart-block");
+        var ctx = document.createElement("canvas");
+        ctx.id = "myChart";
+        chart_block.appendChild(ctx);
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'New Dwellings Approved',
+                    data: dwells,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    };
+</script>

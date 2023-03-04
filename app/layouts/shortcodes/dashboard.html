@@ -1,0 +1,43 @@
+{{ $kpi_description := .Get "kpi_description" }}
+{{ $chart_title := .Get "chart_title" }}
+
+<main class="rows is-multiline">
+    <div class="row">
+        <div class="columns">
+            <!-- Area Selector -->
+            <div class="column is-6">
+                <div class="box" style="height:100%">
+                    <div class="label">Select a Local Government Area</div>
+                    <form class="field" onsubmit="queryData();return false;">
+                        <input class="subtitle" type="text" id="lga_id" name="lga_id" list="lga_list">
+                        <datalist id="lga_list"></datalist>
+                        <input class="button is-info" type="submit" id="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+            <!-- KPI Description -->
+            <div class="column is-6">
+                <div class="box" style="height:100%">
+                    <div class="label">KPI Description</div>
+                    <small>
+                        {{ $kpi_description }}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Chart -->
+    <div class="row">
+        <div class="columns">
+            <div class="column">
+                <div class="panel">
+                    <p class="panel-heading">
+                        {{ $chart_title }}
+                    </p>
+                    <div class="panel-block" id="chart-block">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

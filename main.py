@@ -40,7 +40,6 @@ if __name__ == "__main__":
     # Access tables
     model_ba = model.BuildingApprovals(db)
     ba_table = db.Table(model_ba.table_name)
-    ba_attrs = ba_table.attribute_definitions
 
     # Delete existing tables and create a table
     if model_ba.table_name in db_tables:
@@ -51,6 +50,7 @@ if __name__ == "__main__":
     ba_table.wait_until_exists()
 
     # ETL process
+    ba_attrs = ba_table.attribute_definitions
     data_path = "./data"
     data_dir = os.path.join(data_path, "building_approval")
     data_files = os.listdir(data_dir)
